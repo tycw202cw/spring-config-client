@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+#form-update {
+	display: none;
+}
+
+#detail > .wrap table {
+	width: 100%;
+	border-top: 2px solid #a9a9a9;
+}
+
+
+#detail > .wrap table tr {
+	border-bottom: 1px solid #a9a9a9;
+	display: block;
+	padding: 1em 0;
+	width: 100%;
+}
+
+#detail > .wrap table tr>* {
+	padding: 0 1em;
+}
+
+#detail > .wrap table tr th {
+	width: 120px;
+	color: #777;
+	text-align: left;
+}

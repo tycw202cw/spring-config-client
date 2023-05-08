@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org"
+	th:replace="layout/layout1 :: layout(~{::head},~{::main})">
+	<head>
+		<style type="text/css">
+			td:nth-of-type(1) {width: 50px;}
+			td:nth-of-type(2) {width: 50px;}
+			td:nth-of-type(3) {width: 120px;}
+			td:nth-of-type(4) {width: 100px;}
+			td:nth-of-type(5) {width: 100px;}
+			td:nth-of-type(6) {width: 100px;}
+			td:nth-of-type(7) {width: 300px;}
+		</style>
+	</head>
+	<main>
+		<h1>메인영역</h1>
+		<div class="wrap view-size">
+			<section>
+				<h1>게시글내용</h1>
+				<div class="wrap">
+					<p class="tit">지하철 엘리베이터 정보</p>
+					<table>
+						<thead>
+							<tr>
+								<td>번호</td>
+								<td>노선</td>
+								<td>역명칭</td>
+								<td>운행방향1</td>
+								<td>운행방향2</td>
+								<td>편의시설</td>
+								<td>전화번호</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="dto:${list}">
+								<td th:text="${dto.NO}">번호</td>
+								<td th:text="${dto.LINE_NAME}">노선</td>
+								<td th:text="${dto.STATION}">역명칭</td>
+								<td>
+									<div th:text="${dto.COURSE1}">운행방향1</div>
+								</td>
+								<td>
+									<div th:text="${dto.COURSE2}">운행방향2</div>
+								</td>
+								<td th:utext="${dto.ICON_PATH}">편의시설</td>
+								<td th:text="${dto.TELNO_INFO}">전화번호</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</section>
+		</div>
+	</main>
+</html>

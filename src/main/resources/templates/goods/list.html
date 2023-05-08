@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org"
+		th:replace="~{layout/layout1::layout(~{this::head},~{this::main})}" >
+	<head>
+	
+	</head>
+	<main>
+		<h1>메인영역</h1>
+		<div class="wrap view-size">
+			<section id="goods-list">
+				<h1>상품목록페이지</h1>
+				<div class="wrap">
+					<p class="tit">상품목록 페이지</p>
+					<div class="flex end">
+						<a href="/goods/new">상품등록</a>
+					</div>
+				</div>
+			</section>
+		</div>
+	</main>
+</html>

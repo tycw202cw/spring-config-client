@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/layout1::layout(~{this::head},~{this::main})}">
+<head>
+	<link rel="stylesheet" href="/css/board/list.css">
+</head>
+<main>
+	<h1>게시글페이지</h1>
+	<div class="wrap view-size">
+		<p class="tit">게시글</p>
+		<div class="sub flex end">
+			<a href="/board/new">글쓰기</a>
+		</div>
+		<table>
+			<thead>
+				<tr>
+					<td>글번호</td>
+					<td>제목</td>
+					<td>조회수</td>
+					<td>작성일</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${#lists.isEmpty(list)}">
+					<th colspan="4">게시글이 존재하지 않습니다.</th>
+				</tr>
+				<tr th:each="dto : ${list}">
+					<td th:text="${dto.bno}">글번호data</td>
+					<td>
+						<!-- <a th:href="${'/borad/'+dto.bno}" th:text="${dto.title}">제목data</a> -->
+						<a th:href="|/board/${dto.bno}|" th:text="${dto.title}">제목data</a>
+						<!-- <a th:href="@{'/borad/'+${dto.bno}}" th:text="${dto.title}">제목data</a> -->
+					</td>
+					<td th:text="${dto.readCount}">조회수data</td>
+					<td>
+						<span th:if="${dto.updatedDate.toLocalDate() eq #temporals.createToday() }" th:text="${#temporals.format(dto.updatedDate, 'HH : mm : ss')}">오늘인경우 시간만</span>
+						<span th:unless="${dto.updatedDate.toLocalDate() eq #temporals.createToday() }" th:text="${dto.updatedDate.toLocalDate()}">오늘이 아니면 날짜만</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</main>
+</html>

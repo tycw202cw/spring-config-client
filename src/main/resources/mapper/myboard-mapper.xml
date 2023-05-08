@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.nowon.mybatis.mapper.MyBoardMapper">
+	<select id="findAll" resultType="com.green.nowon.domain.dto.MyBoardDTO">
+		select * from my_board order by bno desc
+		LIMIT #{limit} OFFSET #{offset}
+		<!-- LIMIT #{offset}, #{limit} -->
+	</select>
+	<insert id="save">
+		insert into my_board(title,content,writer)
+		values(#{title},#{content},#{writer})
+	</insert>
+	
+	<select id="findByBno" resultType="com.green.nowon.domain.dto.MyBoardDTO">
+		select * from my_board
+		where bno=#{bno}
+	</select>
+	
+	<delete id="deleteByBno">
+		delete from my_board
+		where bno=#{bno}
+	</delete>
+	
+	<update id="updateByBno">
+		update my_board
+		set title=#{title},content=#{content}
+		where bno=#{bno}
+	</update>
+	
+	<update id="addCount">
+		update my_board
+		set read_count=read_count+1
+		where bno=#{bno}
+	</update>
+</mapper>

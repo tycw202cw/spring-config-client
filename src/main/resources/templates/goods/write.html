@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org"
+		th:replace="~{layout/layout1::layout(~{this::head},~{this::main})}" >
+	<head>
+		<!-- include libraries(jQuery, bootstrap) -->
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<!-- include summernote css/js -->
+		<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$('#summernote').summernote();
+			})
+		</script>
+	</head>
+	<main>
+		<h1>메인영역</h1>
+		<div class="wrap view-size">
+			<section id="goods-list">
+				<h1>상품등록페이지</h1>
+				<div class="wrap">
+					<p class="tit">상품등록 페이지</p>
+					<!-- 파일업로드 처리시 enctype="multipart/form-data"로 설정 -->
+					<form action="/goods" method="post" enctype="multipart/form-data">
+						<p>
+							<input type="text" name="name" placeholder="상품명등록">
+						</p>
+						<p>
+							<input  type="text" name="price" placeholder="가격" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+						</p>
+						<p>
+							<label>파일은 2MB이내로 이미지파일만 허용합니다.</label>
+							<input type="file" name="img" accept="image/*">
+						</p>
+						<p>
+							<textarea id="summernote" name="content"></textarea>
+						</p>
+						<p>
+							<button type="submit">등록</button>
+						</p>
+					</form>
+				</div>
+			</section>
+		</div>
+	</main>
+</html>

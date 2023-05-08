@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org"
+	th:replace="layout/layout1 :: layout(~{::head},~{::main})">
+	<head>
+		
+	</head>
+	<main>
+		<h1>메인영역</h1>
+		<div class="wrap view-size">
+			<section>
+				<h1>게시글내용</h1>
+				<div class="wrap">
+					<p class="tit">버스 정류장 정보</p>
+					<table>
+						<thead>
+							<tr>
+								<td>정류소번호</td>
+								<td>정류소명</td>
+								<td>X좌표</td>
+								<td>Y좌표</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="dto:${list}">
+								<td th:text="${dto.STOP_NO}">정류소번호</td>
+								<td th:text="${dto.STOP_NM}">정류소명</td>
+								<td th:text="${dto.XCODE}">X좌표</td>
+								<td th:text="${dto.YCODE}">Y좌표</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</section>
+		</div>
+	</main>
+</html>

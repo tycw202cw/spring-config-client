@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org"
+	th:replace="layout/layout1 :: layout(~{::head},~{::main})">
+	<head>
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fd79e69d7d4644ec282b1d645f057e63"></script>
+		<script type="text/javascript">
+			$(function(){	
+				var container = document.getElementById('map');
+				var options = {
+					center: new kakao.maps.LatLng(33.450701, 126.570667),
+					level: 3
+				};
+		
+				var map = new kakao.maps.Map(container, options);	
+			})
+		</script>
+	</head>
+	<main>
+		<h1>메인영역</h1>
+		<div class="wrap view-size">
+			<section>
+				<h1>게시글내용</h1>
+				<div class="wrap">
+					<p class="tit">버스정류소 정보</p>
+					
+					<ul class="flex">
+						<li>정류소번호</li>
+						<li>정류소명</li>
+						<li>X좌표</li>
+						<li>Y좌표</li>
+					</ul>
+					<ol class="flex" th:each="dto:${list}">
+						<li th:text="${dto.stopNo}">정류소번호</li>
+						<li th:text="${dto.stopNm}">정류소명</li>
+						<li th:text="${dto.xcode}">X좌표</li>
+						<li th:text="${dto.ycode}">Y좌표</li>
+					</ol>
+					<div id="map" style="width:500px;height:400px;"></div>
+				</div>
+			</section>
+		</div>
+	</main>
+</html>

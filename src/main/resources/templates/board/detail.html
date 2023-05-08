@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/layout1::layout(~{this::head},~{this::main})}">
+<head>
+	<!-- include libraries(jQuery, bootstrap) -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<!-- include summernote css/js -->
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+	
+	<link rel="stylesheet" href="/css/board/detail.css">
+	<script type="text/javascript">
+		$(function(){
+			$('#summernote').summernote();
+			$("#btn-update").click(clickedBtnUpdate);
+			
+		});
+		
+		function clickedBtnUpdate(){
+			$("#basic").hide();
+			$("#form-update").show();
+		}
+		
+		function clickedBtnCancel(){
+			$("#basic").show();
+			$("#form-update").hide();
+		}
+	</script>
+</head>
+<main>
+	<h1>게시글</h1>
+	<div class="wrap view-size">
+		<p class="tit">게시글 상세페이지</p>
+		<section id="detail">
+			<h1>상세정보</h1>
+			<div class="wrap">
+				<table id="basic">
+					<tr>
+						<th>글번호</th>
+						<td th:text="${detail.bno}">1</td>						
+					</tr>
+					<tr>
+						<th>최초 작성일</th>
+						<td th:text="${detail.createdDate}">생성일</td>
+					</tr>
+					<tr>
+						<th>최초 수정일</th>
+						<td th:text="${detail.updatedDate}">수정일</td>
+					</tr>
+					<tr>
+						<th>조회수</th>
+						<td th:text="${detail.readCount}">조회수</td>
+					</tr>
+					<tr>
+						<th>제목</th>
+						<td th:text="${detail.title}">제목</td>
+					</tr>
+					<tr>
+						<td colspan="2" th:utext="${detail.content}">내용</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="flex">
+							<button type="button" id="btn-update">수정</button>
+							<form th:action="|/board/${detail.bno}|" method="post">
+								<input type="hidden" name="_method" value="DELETE">
+								<button>삭제</button>
+							</form>
+						</td>
+					</tr>
+				</table>
+				<!-- /////////////수정 버튼 클릭시 화면///////////// -->
+				<form id="form-update" th:action="@{|/board/${detail.bno}|}" method="post">
+					<table>
+						<tr>
+							<th>글번호</th>
+							<td th:text="${detail.bno}">1</td>						
+						</tr>
+						<tr>
+							<th>최초 작성일</th>
+							<td th:text="${detail.createdDate}">생성일</td>
+						</tr>
+						<tr>
+							<th>최초 수정일</th>
+							<td th:text="${detail.updatedDate}">수정일</td>
+						</tr>
+						<tr>
+							<th>조회수</th>
+							<td th:text="${detail.readCount}">조회수</td>
+						</tr>
+						<tr>
+							<th>제목</th>
+							<td>
+								<input type="text" name="title" th:value="${detail.title}">
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<textarea id="summernote" name="content">[(${detail.content})]</textarea>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<input type="hidden" name="_method" value="PUT">
+								<input type="hidden" name="bno" th:value="${detail.bno}">
+								<button type="button" onclick="clickedBtnCancel()">취소</button>
+								<button type="submit">수정완료</button>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</section>
+
+	</div>
+</main>
+</html>

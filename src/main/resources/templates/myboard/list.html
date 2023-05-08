@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org"
+	th:replace="layout/layout1 :: layout(~{::head},~{::main})">
+	<head>
+		<link rel="stylesheet" href="/css/myboard/list.css">
+		<script th:inline="javascript">
+		
+			var page=/*[[${param.page}]]*/
+			
+			$(function(){
+				if(page==null || page=="")page=1;
+				var pageList=$('.page-wrap a');
+				pageList.eq(page-1).addClass("target");
+				
+			});
+			
+		</script>
+	</head>
+	<main>
+		<h1>메인영역</h1>
+		<div class="wrap view-size">
+			<section id="myboard">
+				<h1>게시글내용</h1>
+				<div class="wrap">
+					<p class="tit">마이게시글</p>
+					<div class="flex end">
+						<a href="/my-board/new">글쓰기</a>
+					</div>
+					<ul class="flex title">
+						<li>글번호</li>
+						<li>제목</li>
+						<li>조회수</li>
+						<li>작성자</li>
+						<li>작성일</li>
+					</ul>
+					<div th:if="${#lists.isEmpty(list)}" class="flex center none-list">
+						게시글이 존재하지 않습니다.
+					</div>
+					<!-- model.addAttribute의 "list" 와 이름이같게 -->
+					<ol th:each="dto:${list}" class="flex lists">
+						<li th:text="${dto.bno}">글번호</li>
+						<li>
+							<a th:href="@{|/my-board/${dto.bno}|}" th:if="${#strings.length(dto.title)>20}" th:text="${#strings.substring(dto.title,0,20)+'...'} "></a>
+							<a th:href="@{|/my-board/${dto.bno}|}" th:unless="${#strings.length(dto.title)>20}" th:text="${dto.title}"></a>
+						</li>
+						<li th:text="${dto.readCount}">조회수</li>
+						<li th:text="${dto.writer}">작성자</li>
+						<li th:text="${dto.updatedDate}">작성일</li>
+					</ol>
+					<div class="page-wrap flex center">
+						<th:block th:each="no : ${#numbers.sequence(1,tot)}">
+							<a th:href="@{|/my-board?page=${no}|}" th:text="${no}">페이지번호</a>
+						</th:block>
+					</div>
+				</div>
+			</section>
+		</div>
+	</main>
+</html>
