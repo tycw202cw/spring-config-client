@@ -14,6 +14,29 @@
 					<div class="flex end">
 						<a href="/goods/new">상품등록</a>
 					</div>
+					<table>
+						<tr> 
+							<td>상품번호</td>
+							<td>사진</td>
+							<td>상품명</td>
+							<td>가격</td>
+							<td>등록일</td>
+						</tr>
+						<tr th:each="dto:${list}"> 
+							<td th:text="${dto.gno}">상품번호</td>
+							<td>
+								<th:block th:each="img:${dto.imgs}">
+								<img th:src="${img.url+img.name}" width="100px">
+								</th:block>
+							</td>
+							<td th:text="${dto.name}">상품명</td>
+							<td>
+								<span th:text="${#numbers.formatInteger(dto.price,3,'COMMA')}"></span>
+								<span>원</span>
+							</td>
+							<td th:text="${dto.updatedDate}">등록일</td>
+						</tr>
+					</table>
 				</div>
 			</section>
 		</div>

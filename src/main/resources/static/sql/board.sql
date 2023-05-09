@@ -36,3 +36,6 @@ create table goods_file(
 	gno bigint not null ,
 	constraint fk_goods_file_goods foreign key(gno) references goods(gno)
 );
+
+--auto_increment 된 pk 조회하는 방법
+SELECT LAST_INSERT_ID();

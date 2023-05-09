@@ -3,8 +3,17 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.green.nowon.mybatis.mapper.GoodsMapper">
+	
 	<insert id="save">
+	<!-- 아래있는 insert쿼리를 실행후 auto_increment 처리되는 pk값을 조회해서 gno에 결과로 매핑 -->
+		<selectKey keyProperty="gno" resultType="long" order="AFTER">
+			select LAST_INSERT_ID()
+		</selectKey>
 		insert into goods (name,price,content)
 		values (#{name},#{price},#{content})
 	</insert>
+	
+	<select id="findAll" resultType="com.green.nowon.domain.entity.GoodsEntity">
+	select * from goods where 1=1
+	</select>
 </mapper>

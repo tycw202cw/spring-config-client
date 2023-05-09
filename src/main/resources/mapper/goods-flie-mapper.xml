@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.nowon.mybatis.mapper.GoodsFileMapper">
+	
+	<insert id="save">
+		insert into goods_file(size, url, name, gno)
+		values(#{size},#{url},#{name},#{gno})
+	</insert>
+	
+	<select id="findByGno" resultType="com.green.nowon.domain.entity.GoodsFileEntity">
+		select * from goods_file where gno=#{gno}; 
+	</select>
+	
+</mapper>

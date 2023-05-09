@@ -7,7 +7,12 @@ import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 @SpringBootApplication
 public class SpringConfigClientApplication {
-
+	
+	//테스트 환경실행시 error
+	static {
+		System.setProperty("com.amazonaws.sdk.disableEc2Metadata","true");
+	}
+	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringConfigClientApplication.class, args);
 	}

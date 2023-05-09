@@ -1,4 +1,4 @@
-package com.green.nowon.domain.dto;
+package com.green.nowon.domain.dto.goods;
 
 import com.green.nowon.domain.entity.GoodsEntity;
 
