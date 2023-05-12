@@ -8,8 +8,8 @@ logging:
           EC2MetadataUtils: error  
         
 spring:
-  config:
-    import: optional:configserver:http://3.39.22.219:8888
+  profiles: 
+    active: dev
   mvc:
     hiddenmethod:
       filter:
@@ -27,18 +27,11 @@ spring:
 cloud:
   aws:
     s3:
-      bucket: myweb.fileupload.bukett
-    stack:
-      auto: false
-    region:
-      auto: false
-      static: ap-northeast-2
-    credentials:
-      access-key: AKIAYT4TUQ6O7AQECBV7
-      secret-key: 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 
+      use-url: //s3.ap-northeast-2.amazonaws.com/myweb.fileupload.bukett/product/images/
+      product-path: product/images/
+      temp-path: product/temp/
+      file-upload-bucket: myweb.fileupload.bukett
       
-seoul:
-  key: 4b636d794974796331313267625a6b50
 mykakao:
   key: 7389a030b066540be6da2c10c442233a
      
@@ -46,4 +39,18 @@ mykakao:
 #스프링 서버는 idle 상태의 커넥션을 max-lifetime이 지나면 연결을 끊고 새로운 커넥션을 생성한다
 #따라서 max-lifetime이 wait_timeout보다 짧아야 RDS가 커넥션을 끊기 전에 스프링 서버 스스로 연결을 끊고 새로운 커넥션을 찾기 때문에 문제가 발생하지 않는다.
 #실제로 hikari CP는 네트워크 지연을 고려하여 max-lifetime을 wait_timeout보다 2~3초 정도 짧게 줄 것을 권고한다.
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+    import: optional:configserver:http://3.39.22.219:8888  
+
+---
+spring:
+  config:
+    activate:
+      on-profile: pro
+    import: 'optional:configserver'  
 

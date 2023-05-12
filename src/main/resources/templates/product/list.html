@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org" th:replace="layout/layout1 :: layout(~{this::head},~{::main})">
+<head>
+	<script type="text/javascript">
+		$(function(){
+			console.log("헤드가 삽입됩니다.");
+		});
+	</script>
+</head>
+<main>
+	<h1>메인영역</h1>
+	<div class="wrap view-size">
+		<section id="products">
+			<h1>s3를 이용한 상품등록</h1>
+			<div class="wrap">
+				<p class="tit">s3를 이용한 상품리스트</p>
+				<div class="flex end">
+					<a href="/products/new">상품등록</a>
+				</div>
+					<table>
+						<tr>
+							<td>상품번호</td>
+							<td>상품이미지</td>
+							<td>상품명</td>
+							<td>가격</td>
+							<td>등록일짜</td>
+						</tr>
+						<tr th:each="dto:${list}">
+							<td th:text=${dto.pno}>상품번호</td>
+							<td>
+								<img alt="상품이미지" th:src="${dto.defUrl}" width="100px">
+							</td>
+							<td th:text=${dto.title}>상품명</td>
+							<td th:text=${dto.price}>가격</td>
+							<td th:text=${dto.updatedDate}>등록일짜</td>
+						</tr>
+					</table>
+			</div>
+		</section>
+	</div>
+</main>
+</html>

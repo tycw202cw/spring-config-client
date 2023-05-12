@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.nowon.mybatis.mapper.ProductMapper">
+	
+	<insert id="save">
+		<selectKey resultType="long" keyProperty="pno" order="AFTER">
+			SELECT LAST_INSERT_ID();
+		</selectKey>
+		insert into product(title,content,price)
+		values(#{title},#{content},#{price})
+	</insert>
+	
+	<select id="findByAll" resultType="com.green.nowon.domain.entity.ProductEntity">
+		select * from product
+	</select>
+	
+	<resultMap type="com.green.nowon.domain.entity.ProductEntity" id="productEntity">
+		<id column="pno" property="pno"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="price" property="price"/>
+		<result column="created_date" property="createdDate"/>
+		<result column="updated_date" property="updatedDate"/>
+		
+		<collection property="files" ofType="com.green.nowon.domain.entity.ProductFileEntity">
+			<id column="fno" property="fno"/>
+			<result column="org_name" property="orgName"/>
+			<result column="new_name" property="newName"/>
+			<result column="created_date" property="createdDate"/>
+			<result column="updated_date" property="updatedDate"/>
+			<result column="pno" property="pno"/>
+			<result column="def_yn" property="defYn"/>
+		</collection>
+	</resultMap>	
+	
+	<select id="findByAllJoinFile" resultMap="productEntity">
+		select p.*, f.* from
+		product p LEFT JOIN product_file f
+		ON p.pno = f.pno
+	</select>
+
+</mapper>

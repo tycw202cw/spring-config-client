@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(addHead,main)">
-	<head>
-		<meta charset="UTF-8">
-		<title>Insert title here</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-		<link rel="stylesheet" href="/css/common.css">
-		<link rel="stylesheet" href="/css/header.css">
-		<link rel="stylesheet" href="/css/footer.css">
-		<th:block th:replace="${addHead}" />
-	</head>
-	<body>
-		<th:block th:replace="~{layout/header}" />
-		<th:block th:replace="${main}" />
-		<th:block th:replace="~{layout/footer}" />
-	</body>
+<html xmlns:th="//www.thymeleaf.org" 
+      th:fragment="layout(addHead,main)">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Insert title here</title>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <link rel="stylesheet" href="/css/common.css">
+        <link rel="stylesheet" href="/css/header.css">
+        <link rel="stylesheet" href="/css/footer.css">
+        <th:block th:insert="${addHead}" />
+    </head>
+    <body>
+      <th:block th:replace="~{layout/header}" />
+      <th:block th:replace="${main}" />
+      <th:block th:replace="~{layout/footer}" />
+    </body>
 </html>
